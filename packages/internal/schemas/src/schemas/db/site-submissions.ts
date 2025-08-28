@@ -11,10 +11,10 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { Architectures } from "./architectures";
-import { Blogs } from "./blogs";
+import { Sites } from "./sites";
 import { FeedInfo } from "@/types/schema-types";
 import {
-  blog_status_enum,
+  site_status_enum,
   submission_status_enum,
   submission_type_enum,
   submitter_type_enum,
@@ -28,11 +28,11 @@ import {
 import { isValidUrl } from "@zhblogs/utils/psl";
 import { z, ZodString } from "zod/v4";
 
-export const BlogSubmissions = pgTable(
-  "blog_submissions",
+export const SiteSubmissions = pgTable(
+  "site_submissions",
   {
     id: integer().primaryKey().generatedAlwaysAsIdentity({ startWith: 100000 }),
-    blog_id: uuid().references(() => Blogs.id, {
+    site_id: uuid().references(() => Sites.id, {
       onDelete: "set null",
       onUpdate: "cascade",
     }),
@@ -48,7 +48,7 @@ export const BlogSubmissions = pgTable(
     }),
     custom_architecture: varchar({ length: 64 }),
     is_recommended: boolean(),
-    blog_status: blog_status_enum(),
+    site_status: site_status_enum(),
     submit_time: timestamp({ withTimezone: true, precision: 3 })
       .notNull()
       .defaultNow(),
@@ -74,29 +74,29 @@ export const BlogSubmissions = pgTable(
     }),
   },
   (table) => [
-    uniqueIndex("blog_submissions_id_index").on(table.id),
-    uniqueIndex("blog_submissions_name_index").on(table.name),
-    uniqueIndex("blog_submissions_url_index").on(table.url),
-    index("blog_submissions_architecture_index").on(table.architecture),
-    index("blog_submissions_blog_status_index").on(table.blog_status),
-    index("blog_submissions_recommend_index").on(table.is_recommended),
-    index("blog_submissions_email_index").on(table.email),
-    index("blog_submissions_ip_index").on(table.ip),
-    index("blog_submissions_submit_time_index").on(table.submit_time.desc()),
-    index("blog_submissions_review_time_index").on(table.review_time.desc()),
-    uniqueIndex("blog_submissions_name_url_index").on(table.name, table.url),
-    index("blog_submissions_status_time_index").on(
+    uniqueIndex("site_submissions_id_index").on(table.id),
+    uniqueIndex("site_submissions_name_index").on(table.name),
+    uniqueIndex("site_submissions_url_index").on(table.url),
+    index("site_submissions_architecture_index").on(table.architecture),
+    index("site_submissions_site_status_index").on(table.site_status),
+    index("site_submissions_recommend_index").on(table.is_recommended),
+    index("site_submissions_email_index").on(table.email),
+    index("site_submissions_ip_index").on(table.ip),
+    index("site_submissions_submit_time_index").on(table.submit_time.desc()),
+    index("site_submissions_review_time_index").on(table.review_time.desc()),
+    uniqueIndex("site_submissions_name_url_index").on(table.name, table.url),
+    index("site_submissions_status_time_index").on(
       table.submission_status,
       table.submit_time.desc()
     ),
-    index("blog_submissions_submitter_index").on(table.submitter_id),
-    index("blog_submissions_reviewer_index").on(table.reviewer_id),
-    index("blog_submissions_type_index").on(table.submission_type),
-    index("blog_submissions_submitter_type_index").on(table.submitter_type),
+    index("site_submissions_submitter_index").on(table.submitter_id),
+    index("site_submissions_reviewer_index").on(table.reviewer_id),
+    index("site_submissions_type_index").on(table.submission_type),
+    index("site_submissions_submitter_type_index").on(table.submitter_type),
   ]
 );
 
-const blogSubmissionRefine = {
+const siteSubmissionRefine = {
   url: (schema: ZodString) =>
     schema
       .refine((value) => {
@@ -117,19 +117,19 @@ const blogSubmissionRefine = {
       .optional(),
 };
 
-export const BlogSubmissionSelectSchema = createSelectSchema(
-  BlogSubmissions,
-  blogSubmissionRefine
+export const SiteSubmissionSelectSchema = createSelectSchema(
+  SiteSubmissions,
+  siteSubmissionRefine
 );
-export const BlogSubmissionInsertSchema = createInsertSchema(
-  BlogSubmissions,
-  blogSubmissionRefine
+export const SiteSubmissionInsertSchema = createInsertSchema(
+  SiteSubmissions,
+  siteSubmissionRefine
 );
-export const BlogSubmissionUpdateSchema = createUpdateSchema(
-  BlogSubmissions,
-  blogSubmissionRefine
+export const SiteSubmissionUpdateSchema = createUpdateSchema(
+  SiteSubmissions,
+  siteSubmissionRefine
 );
 
-export type BlogSubmissionSelect = z.infer<typeof BlogSubmissionSelectSchema>;
-export type BlogSubmissionInsert = z.infer<typeof BlogSubmissionInsertSchema>;
-export type BlogSubmissionUpdate = z.infer<typeof BlogSubmissionUpdateSchema>;
+export type SiteSubmissionSelect = z.infer<typeof SiteSubmissionSelectSchema>;
+export type SiteSubmissionInsert = z.infer<typeof SiteSubmissionInsertSchema>;
+export type SiteSubmissionUpdate = z.infer<typeof SiteSubmissionUpdateSchema>;

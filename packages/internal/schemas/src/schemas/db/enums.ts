@@ -1,7 +1,7 @@
 import { ARCHITECTURE_TYPE_KEYS } from "@zhblogs/constants/architecture-types";
-import { BLOG_STATUS_TAG_KEYS } from "@zhblogs/constants/blog-status-tags";
-import { BLOG_STATUS_TYPE_KEYS } from "@zhblogs/constants/blog-status-types";
-import { BLOG_TO_TAGS_CONNECTION_TYPE_KEYS } from "@zhblogs/constants/blog-to-tags-connection-types";
+import { SITE_STATUS_TAG_KEYS } from "@zhblogs/constants/site-status-tags";
+import { SITE_STATUS_TYPE_KEYS } from "@zhblogs/constants/site-status-types";
+import { SITE_TO_TAGS_CONNECTION_TYPE_KEYS } from "@zhblogs/constants/site-to-tags-connection-types";
 import { CLAIM_TYPE_KEYS } from "@zhblogs/constants/claim-types";
 import { FROM_SOURCE_KEYS } from "@zhblogs/constants/frome-sources";
 import { GITHUB_WEBHOOK_LOGS_STATUS_TYPE_KEYS } from "@zhblogs/constants/github-webhook-logs-status-types";
@@ -18,9 +18,9 @@ export const architecture_type_enum = pgEnum(
   ARCHITECTURE_TYPE_KEYS as [string]
 );
 
-export const blog_status_enum = pgEnum(
-  "blog_status_enum",
-  BLOG_STATUS_TYPE_KEYS as [string]
+export const site_status_enum = pgEnum(
+  "site_status_enum",
+  SITE_STATUS_TYPE_KEYS as [string]
 );
 
 export const from_source_enum = pgEnum(
@@ -48,9 +48,9 @@ export const user_social_account_provider_enum = pgEnum(
   USER_SOCIAL_ACCOUNT_PROVIDERS_KEYS as [string]
 );
 
-export const blog_status_tag_enum = pgEnum(
-  "blog_status_tag_enum",
-  BLOG_STATUS_TAG_KEYS as [string]
+export const site_status_tag_enum = pgEnum(
+  "site_status_tag_enum",
+  SITE_STATUS_TAG_KEYS as [string]
 );
 
 export const claimed_by_enum = pgEnum(
@@ -58,9 +58,9 @@ export const claimed_by_enum = pgEnum(
   CLAIM_TYPE_KEYS as [string]
 );
 
-export const blog_to_tags_connection_type_enum = pgEnum(
-  "blog_to_tags_connection_type_enum",
-  BLOG_TO_TAGS_CONNECTION_TYPE_KEYS as [string]
+export const site_to_tags_connection_type_enum = pgEnum(
+  "site_to_tags_connection_type_enum",
+  SITE_TO_TAGS_CONNECTION_TYPE_KEYS as [string]
 );
 
 export const github_webhook_logs_status_type_enum = pgEnum(
