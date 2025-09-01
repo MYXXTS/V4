@@ -14,7 +14,7 @@ const blogs = defineCollection({
     create_time: z.date(),
     tags: z.array(z.string()),
     category: z.string(),
-    editors: z.array(reference("editor")),
+    editors: z.array(reference("members")),
     groups: z.array(reference("group")),
   }),
 });
@@ -28,13 +28,13 @@ const docs = defineCollection({
     title: z.string(),
     description: z.string(),
     create_time: z.date(),
-    editors: z.array(reference("editor")),
+    editors: z.array(reference("members")),
     groups: z.array(reference("group")),
   }),
 });
 
-const editor = defineCollection({
-  loader: file("../../contents/editors.json"),
+const members = defineCollection({
+  loader: file("../../contents/members.json"),
   schema: z.object({
     id: z.string(), // GitHub 用户名，用于获取头像和Github（个人页面中 URL 地址显示的用户名）
     description: z.string(), // 个人简介
@@ -42,6 +42,7 @@ const editor = defineCollection({
     identity: z.enum(IDENTITY_KEYS as [string]), // 身份标识
     url: z.string().url().optional(), // 个人网站网址
     nickname: z.string().optional(), // 昵称，如果不填写则使用 GitHub 用户名
+    status: z.boolean().default(true), // true 为在职，false 为离开，默认为 true
     join_time: z
       .string()
       .transform((str) => new Date(str))
@@ -65,6 +66,6 @@ const group = defineCollection({
 export const collections = {
   blogs,
   docs,
-  editor,
+  members,
   group,
 };

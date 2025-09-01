@@ -17,7 +17,7 @@ export default defineConfig({
   server: {
     port: 9902,
   },
-  build:{
+  build: {
     serverEntry: 'index.mjs',
   },
   vite: {
@@ -32,6 +32,24 @@ export default defineConfig({
           rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
+    }
+  },
+  redirects: {
+    "/list": {
+      status: 301,
+      destination: "/site"
+    },
+    "/new": {
+      status: 301,
+      destination: "/site/submit"
+    },
+    "/random": {
+      status: 301,
+      destination: "/site/go-site",
+    },
+    "/charts": {
+      status: 301,
+      destination: "/site/stats",
     }
   },
   integrations: [generateBuildInfoIntegration(), react(), vue(), mdx(), sitemap(), partytown()],

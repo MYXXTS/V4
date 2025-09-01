@@ -1,0 +1,97 @@
+---
+import { Footer } from "@web/components/react/layout/footer";
+import {
+  NavigationMenu,
+  type NavigationMenuItem,
+} from "@web/components/react/layout/navigation-menu";
+import BaseLayout from "@web/layouts/base.astro";
+
+const menuItems: NavigationMenuItem[] = [
+  {
+    label: "站点数据",
+    icon: "IconListTree",
+    children: [
+      {
+        label: "站点列表",
+        href: "/site",
+        icon: "IconList",
+        description: "浏览所有收录的中文博客站点",
+      },
+      {
+        label: "随机站点",
+        href: "/site/go",
+        icon: "IconArrowsRandom",
+        description: "随机跳转到一个博客站点",
+      },
+      {
+        label: "文章广场",
+        href: "/site/post",
+        icon: "IconLayoutGrid",
+        description: "已收录博客站点的文章列表",
+      },
+      {
+        label: "数据统计",
+        href: "/site/stats",
+        icon: "IconChartPie",
+        description: "查看博客站点数据统计图表",
+      },
+      {
+        label: "数据修正",
+        href: "/site/feedback",
+        icon: "IconPencil",
+        description: "对已收录数据的反馈，包括修改和删除",
+      },
+    ],
+  },
+  {
+    label: "项目文档",
+    href: "/docs",
+    icon: "IconFileText",
+  },
+  {
+    label: "项目博客",
+    href: "/blogs",
+    icon: "IconArticle",
+  },
+  {
+    label: "关于",
+    icon: "IconInfoCircle",
+    children: [
+      {
+        label: "项目",
+        href: "/about",
+        icon: "IconInfoCircle",
+        description: "了解集博栈项目",
+      },
+      {
+        label: "成员",
+        href: "/about/members",
+        icon: "IconUsers",
+        description: "项目贡献者和团队成员",
+      },
+      {
+        label: "赞助",
+        href: "/about/sponsor",
+        icon: "IconHeart",
+        description: "支持项目发展",
+      },
+      {
+        label: "加入",
+        href: "/about/join",
+        icon: "IconUserPlus",
+        description: "加入我们的团队",
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout>
+  <div class="max-w-7xl mx-auto px-5 py-2">
+    <NavigationMenu client:only="react" items={menuItems} />
+    <div>
+      <slot />
+    </div>
+    <Footer client:only="react" />
+  </div>
+</BaseLayout>

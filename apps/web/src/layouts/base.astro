@@ -1,0 +1,57 @@
+---
+import "@web/styles/index.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const fullTitle = title ? `集博栈 - ${title}` : "集博栈";
+const fullDescription = description || "尝试链接几乎所有的中文博客";
+---
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={fullDescription} />
+    <meta
+      name="keywords"
+      content="集博栈, 中文博客列表导航, 博客, 列表, 导航"
+    />
+
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="index, follow" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="author" content="zhblogs" />
+    <meta name="copyright" content="zhblogs" />
+
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#3D3B4F"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#D6ECF0"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <!-- TODO: Open Graph Meta Tags 、Twitter Card Meta Tags And Schema Org Meta Tags -->
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

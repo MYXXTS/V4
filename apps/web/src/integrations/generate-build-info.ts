@@ -68,7 +68,7 @@ const getVersion = (logger: AstroIntegrationLogger): string => {
 const generateBuildInfo = (logger: AstroIntegrationLogger): void => {
   const { fullHash, commitLink, commitTime } = getLastCommitHash(logger);
   const version = getVersion(logger);
-  const path = "../../contents/system-info.json";
+  const path = "./src/assets/build-info.json";
 
   const buildInfo: BuildInfo = {
     version,

@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "tailwindcss-animated";
+
+@plugin 'tailwind-scrollbar';
+@plugin "tailwindcss-motion";
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
+  prefix: "dui-";
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-xs: 30rem; /* 480px */
+  --breakpoint-sm: 48rem; /* 768px */
+  --breakpoint-md: 64rem; /* 1024px */
+  --breakpoint-lg: 80rem; /* 1280px */
+  --color-zhblogs-red: #ce161c;
+}
